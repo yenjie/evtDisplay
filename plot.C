@@ -1,4 +1,3 @@
-#include <TFile.h>
 #include <TTree.h>
 #include <TLorentzVector.h>
 #include <TCanvas.h>
@@ -8,6 +7,8 @@
 #include <TColor.h>
 #include <TVector3.h>
 #include <TRandom2.h>
+#include <TPaveLabel.h>
+#include <TFile.h>
 
 #include <iostream>
 
@@ -121,7 +122,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
 int plot(int evtNum=1,double time=0,int id=0)
 {
    cout <<time<<endl;
-   TCanvas *c = new TCanvas("c","",0,0,1100,1100);
+   TCanvas *c = new TCanvas("c","",0,0,1000,1000);
    circle(0,0,0,500,0,2);
    cout <<"I am alive"<<endl;
    TFile *inf = new TFile("sample/outFile_HYDJET1p9_5p02TeVPbPb_MB_MERGED_20180817.root");
@@ -246,6 +247,18 @@ int plot(int evtNum=1,double time=0,int id=0)
 		,1,particles[j].pdg,flag);
       }
    }      
+   TPaveLabel *timeLabel = new TPaveLabel(0.7,0,0.7,0.1,Form(" T= %.2f fm/c ",time));
+   timeLabel->SetFillColor(1); 
+   timeLabel->SetTextColor(5); 
+   timeLabel->SetTextSize(0.3);
+   timeLabel->Draw(); 
+
+   TPaveLabel *groupLabel = new TPaveLabel(0.0,0.9,0.8,1," MIT Heavy Ion Event Display: Pb+Pb 5.02 TeV ");
+   groupLabel->SetFillColor(1); 
+   groupLabel->SetTextColor(0); 
+   groupLabel->SetTextSize(0.3);
+   groupLabel->Draw(); 
+
    c->SaveAs(Form("plot/result-%05d.png",id));
    return 1;
 }

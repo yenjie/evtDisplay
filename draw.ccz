@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <iostream.h>
+#include "shellSort.h"
+
+#define npara 6
+#define maxNum 10000
+#define mintime 100
+#define maxtime 400
+
+void readData(float a[][10]);
+
+int main()
+{
+  
+  float a[maxNum][10];
+ 
+  sortTime(a);
+  readData(a);
+ 
+
+
+}
+
+
+
+
+void readData(float a[][10])
+{
+   FILE *dataFile = fopen("./input.dat","r");
+
+   int flag=1; 
+   char tmp[100];   
+   float tmpData[10];
+
+   cout <<"Data file opened, read the content..."<<endl;
+
+   while (flag == 1)
+   {
+      for (int i=0;i<npara;i++)
+      {	
+         flag=fscanf(dataFile,"%s",&tmp);
+         
+      }
+
+   }
+
+   fclose(dataFile);
+}

@@ -120,6 +120,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
 
 int plot(int evtNum=1,double time=0,int id=0)
 {
+   cout <<time<<endl;
    TCanvas *c = new TCanvas("c","",0,0,800,800);
    circle(0,0,0,500,0,2);
    cout <<"I am alive"<<endl;
@@ -245,6 +246,6 @@ int plot(int evtNum=1,double time=0,int id=0)
 		,1,particles[j].pdg,flag);
       }
    }      
-   c->SaveAs(Form("plot/result-%d.png",id));
+   c->SaveAs(Form("plot/result-%05d.png",id));
    return 1;
 }

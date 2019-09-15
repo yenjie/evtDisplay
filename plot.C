@@ -75,7 +75,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
    }
 //   if (fabs(y)>10) return 0; 
    
-   double size=200;   //  size of the canvas
+   double size=50;   //  size of the canvas
 
    double px=x/size+0.5;
    double py=y/size+0.5;
@@ -123,7 +123,7 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
 {
    cout <<time<<endl;
    TCanvas *c = new TCanvas("c","",0,0,1000,1000);
-   circle(0,0,0,500,0,2);3
+   circle(0,0,0,500,0,2);
    cout <<"I am alive"<<endl;
    TFile *inf = new TFile("sample/outFile_HYDJET1p9_5p02TeVPbPb_MB_MERGED_20180817.root");
    TTree *genTree = (TTree*)inf->Get("genTree");

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <iostream>
 
 using namespace std;
@@ -167,7 +168,7 @@ void drawInRoot(int dataTime)
      fprintf(macroFile1,".q\n");
      
      fclose(macroFile1);
-     system("root -l -q -b <drawit.macro >> ./draw.log");
+     system("root -l <drawit.macro >> ./draw.log");
   
 }
 

@@ -67,7 +67,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
          double f=(i)/(double)nColor;
 	 color = new TColor(mesonColor[i],f,f,f);
          baryonColor[i]=1180+nColor+i;
-         color = new TColor(baryonColor[i],0,0,f);
+         color = new TColor(baryonColor[i],0,0,f*0.4+0.6);
       }
    
       begin=0;
@@ -121,7 +121,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
 int plot(int evtNum=1,double time=0,int id=0)
 {
    cout <<time<<endl;
-   TCanvas *c = new TCanvas("c","",0,0,800,800);
+   TCanvas *c = new TCanvas("c","",0,0,1100,1100);
    circle(0,0,0,500,0,2);
    cout <<"I am alive"<<endl;
    TFile *inf = new TFile("sample/outFile_HYDJET1p9_5p02TeVPbPb_MB_MERGED_20180817.root");

@@ -1,0 +1,1 @@
+ffmpeg -framerate 60 -i result/result-%5d.png -c:v libx264 -r 30 -pix_fmt yuv420p out.mp4

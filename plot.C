@@ -122,7 +122,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
 int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
 {
    cout <<time<<endl;
-   TCanvas *c = new TCanvas("c","",0,0,1000,1000);
+   TCanvas *c = new TCanvas("c","",0,0,1600,1600);
    circle(0,0,0,500,0,2);
    cout <<"I am alive"<<endl;
    TFile *inf = new TFile("sample/outFile_HYDJET1p9_5p02TeVPbPb_MB_MERGED_20180817.root");

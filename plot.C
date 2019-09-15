@@ -68,7 +68,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
          double f=(i)/(double)nColor;
 	 color = new TColor(mesonColor[i],f,f,f);
          baryonColor[i]=1180+nColor+i;
-         color = new TColor(baryonColor[i],0,0,f*0.4+0.6);
+         color = new TColor(baryonColor[i],0.,0.,f*0.4+0.6);
       }
    
       begin=0;
@@ -123,7 +123,7 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
 {
    cout <<time<<endl;
    TCanvas *c = new TCanvas("c","",0,0,1000,1000);
-   circle(0,0,0,500,0,2);3
+   circle(0,0,0,500,0,2);
    cout <<"I am alive"<<endl;
    TFile *inf = new TFile("sample/outFile_HYDJET1p9_5p02TeVPbPb_MB_MERGED_20180817.root");
    TTree *genTree = (TTree*)inf->Get("genTree");
@@ -240,7 +240,7 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
 	 }	 
 	 //cout <<particles[j].l.Py()<<" "<<particles[j].pdg<<" "<<time/gamma<<" "<<flag<<endl;
 	 double scale = beta*time/particles[j].l.P();
-         if (qgpOnly&&flag!=4) continue;
+         if (qgpOnly&&flag!=4&&particles[j].pdg!=197) continue;
          circle(particles[j].p.X()+particles[j].l.Px()*scale,
 	        particles[j].p.Y()+particles[j].l.Py()*scale,
 		particles[j].p.Z()+particles[j].l.Pz()*scale

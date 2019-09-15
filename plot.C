@@ -75,7 +75,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
    }
 //   if (fabs(y)>10) return 0; 
    
-   double size=200;   //  size of the canvas
+   double size=50;   //  size of the canvas
 
    double px=x/size+0.5;
    double py=y/size+0.5;

@@ -75,7 +75,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
    }
 //   if (fabs(y)>10) return 0; 
    
-   double size=50;   //  size of the canvas
+   double size=200;   //  size of the canvas
 
    double px=x/size+0.5;
    double py=y/size+0.5;
@@ -248,19 +248,22 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
       }
    }      
    TPaveLabel *timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form(" T= %.2f fm/c ",time));
-   timeLabel->SetFillColor(1); 
+   timeLabel->SetFillColor(1);
+   timeLabel->SetFillStyle(0); 
    timeLabel->SetTextColor(5); 
    timeLabel->SetTextSize(0.3);
    timeLabel->Draw(); 
 
-   TPaveLabel *groupLabel = new TPaveLabel(0.0,0.9,0.8,1," MIT Heavy Ion Event Display: Pb+Pb 5.02 TeV ");
+   TPaveLabel *groupLabel = new TPaveLabel(0.4,0.9,0.4,1," MIT Heavy Ion Event Display: Pb+Pb 5.02 TeV ");
    groupLabel->SetFillColor(1); 
+   groupLabel->SetFillStyle(0); 
    groupLabel->SetTextColor(0); 
    groupLabel->SetTextSize(0.3);
    groupLabel->Draw(); 
 
    TPaveLabel *codeLabel = new TPaveLabel(0.3,0.0,0.3,0.1," Yen-Jie Lee, Andre S. Yoon and Wit Busza ");
    codeLabel->SetFillColor(1); 
+   codeLabel->SetFillStyle(0); 
    codeLabel->SetTextColor(0); 
    codeLabel->SetTextSize(0.3);
    codeLabel->Draw(); 

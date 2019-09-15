@@ -247,7 +247,7 @@ int plot(int evtNum=1,double time=0,int id=0)
 		,1,particles[j].pdg,flag);
       }
    }      
-   TPaveLabel *timeLabel = new TPaveLabel(0.7,0,0.7,0.1,Form(" T= %.2f fm/c ",time));
+   TPaveLabel *timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form(" T= %.2f fm/c ",time));
    timeLabel->SetFillColor(1); 
    timeLabel->SetTextColor(5); 
    timeLabel->SetTextSize(0.3);
@@ -258,6 +258,13 @@ int plot(int evtNum=1,double time=0,int id=0)
    groupLabel->SetTextColor(0); 
    groupLabel->SetTextSize(0.3);
    groupLabel->Draw(); 
+
+   TPaveLabel *codeLabel = new TPaveLabel(0.3,0.0,0.3,0.1," Yen-Jie Lee, Andre S. Yoon and Wit Busza ");
+   codeLabel->SetFillColor(1); 
+   codeLabel->SetTextColor(0); 
+   codeLabel->SetTextSize(0.3);
+   codeLabel->Draw(); 
+
 
    c->SaveAs(Form("plot/result-%05d.png",id));
    return 1;

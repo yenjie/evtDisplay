@@ -15,6 +15,7 @@
 //#include "circle.c"
 
 TRandom2 rnd;
+TRandom2 rnd2;
 
 class particle
 {
@@ -43,6 +44,17 @@ struct comparePy
     }    
 };
 
+void genSphIon(TVector3 &r)
+{
+    static Float_t rPb=7.;
+    r.SetX(1000);
+    while (r.Mag()>rPb) {	 
+       r.SetX(rnd2.Rndm()*rPb*2-rPb);
+       r.SetY(rnd2.Rndm()*rPb*2-rPb);
+       r.SetZ((rnd2.Rndm()*rPb*2-rPb)/5020./2);
+    }
+}
+
 void genSph(TVector3 &r)
 {
     static Float_t rPb=7.;
@@ -55,7 +67,7 @@ void genSph(TVector3 &r)
 }
 
 
-int circle(float x,float y,float z,float r,float c,float flag)
+int circle(float x,float y,float z,float r,float c,float flag,float time)
 {
    static int begin=1;
    const int nColor=40;
@@ -76,7 +88,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
 //   if (fabs(y)>10) return 0; 
    
    double size=200;   //  size of the canvas
-
+   if (time<0) size=size+time*5;
    double px=x/size+0.5;
    double py=y/size+0.5;
    double pz=z/size+0.5;
@@ -121,9 +133,11 @@ int circle(float x,float y,float z,float r,float c,float flag)
 
 int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
 {
+   if (time<0) rnd2.SetSeed(time*100);
+   bool doRotate = 1; // rotate the view in the begining
    cout <<time<<endl;
    TCanvas *c = new TCanvas("c","",0,0,1000,1000);
-   circle(0,0,0,500,0,2);
+   circle(0,0,0,500,0,2,0);
    cout <<"I am alive"<<endl;
    TFile *inf = new TFile("sample/outFile_HYDJET1p9_5p02TeVPbPb_MB_MERGED_20180817.root");
    TTree *genTree = (TTree*)inf->Get("genTree");
@@ -177,18 +191,26 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
       for (int j=0;j<208;j++){
 	 particle p;
 	 p.l.SetPxPyPzE(0.,0,-2510,sqrt(2510*2510+0.938*0.938));
-	 genSph(p.p);
+	 genSphIon(p.p);
 	 p.time=time;
 	 p.pdg=197;
+	 if (doRotate&&time<-10) {
+	    p.l.RotateX(TMath::Pi()/2*(time+10)/20.);
+	    p.p.RotateX(TMath::Pi()/2*(time+10)/20.);
+	 }
 	 particles.push_back(p);
       
       }
       for (int j=0;j<208;j++){
 	 particle p;
 	 p.l.SetPxPyPzE(0.,0,2510,sqrt(2510*2510+0.938*0.938));
-	 genSph(p.p);
+	 genSphIon(p.p);
 	 p.time=time;
 	 p.pdg=197;
+	 if (doRotate&&time<-10) {
+	    p.l.RotateX(TMath::Pi()/2.*(time+10)/20.);
+	    p.p.RotateX(TMath::Pi()/2.*(time+10)/20.);
+	 }
 	 particles.push_back(p);
       
       }
@@ -200,7 +222,7 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
 	 particle p;
 	 p.l.SetPtEtaPhiM((*genPt)[j],(*genEta)[j],(*genPhi)[j],partRoot->Mass());
 	 p.pdg=(*genID)[j];
-	 genSph(p.p);
+	 genSphIon(p.p);
 	 p.time=time;
 	 particles.push_back(p);
       }
@@ -244,9 +266,10 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
          circle(particles[j].p.X()+particles[j].l.Px()*scale,
 	        particles[j].p.Y()+particles[j].l.Py()*scale,
 		particles[j].p.Z()+particles[j].l.Pz()*scale
-		,1,particles[j].pdg,flag);
+		,1,particles[j].pdg,flag, time);
       }
    }      
+   
    TPaveLabel *timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form(" T= %.2f fm/c ",time));
    timeLabel->SetFillColor(1);
    timeLabel->SetFillStyle(0); 

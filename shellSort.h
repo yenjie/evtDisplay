@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void shellSort(float A[][10],int size,int N,int dimension);
+//void shellSort(float A[][10],int size,int N,int dimension);
 void ArrayCopy(float tmp[],float A[][10],int i,int dimension);
 void ArrayCopy(float A[][10],float tmp[],int i,int dimension);
 void ArrayCopy(float A[][10],int i, int j,int dimension);

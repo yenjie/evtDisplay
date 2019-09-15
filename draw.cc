@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <iostream>
 
-using namespace std
-#include <math.h>
+using namespace std;
+//#include <math.h>
 #include "shellSort.h"
 //#include "circle.c"
 

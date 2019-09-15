@@ -119,7 +119,7 @@ int circle(float x,float y,float z,float r,float c,float flag)
    
 
 
-int plot(int evtNum=1,double time=0,int id=0)
+int plot(int evtNum=1,double time=0,int id=0n bool qgpOnly = false)
 {
    cout <<time<<endl;
    TCanvas *c = new TCanvas("c","",0,0,1000,1000);
@@ -240,7 +240,7 @@ int plot(int evtNum=1,double time=0,int id=0)
 	 }	 
 	 //cout <<particles[j].l.Py()<<" "<<particles[j].pdg<<" "<<time/gamma<<" "<<flag<<endl;
 	 double scale = beta*time/particles[j].l.P();
-         
+         if (qgpOnly&&flag!=4) continue;
          circle(particles[j].p.X()+particles[j].l.Px()*scale,
 	        particles[j].p.Y()+particles[j].l.Py()*scale,
 		particles[j].p.Z()+particles[j].l.Pz()*scale

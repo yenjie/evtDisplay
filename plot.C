@@ -136,7 +136,7 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
    if (time<0) rnd2.SetSeed(time*100);
    bool doRotate = 1; // rotate the view in the begining
    cout <<time<<endl;
-   TCanvas *c = new TCanvas("c","",0,0,1000,1000);
+   TCanvas *c = new TCanvas("c","",0,0,1600,1600);
    circle(0,0,0,500,0,2,0);
    cout <<"I am alive"<<endl;
    TFile *inf = new TFile("sample/outFile_HYDJET1p9_5p02TeVPbPb_MB_MERGED_20180817.root");

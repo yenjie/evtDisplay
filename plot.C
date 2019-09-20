@@ -17,6 +17,8 @@
 TRandom2 rnd;
 TRandom2 rnd2;
 
+double beamEnergy ;
+
 class particle
 {
     public:
@@ -51,7 +53,7 @@ void genSphIon(TVector3 &r)
     while (r.Mag()>rPb) {	 
        r.SetX(rnd2.Rndm()*rPb*2-rPb);
        r.SetY(rnd2.Rndm()*rPb*2-rPb);
-       r.SetZ((rnd2.Rndm()*rPb*2-rPb)/5020./2);
+       r.SetZ((rnd2.Rndm()*rPb*2-rPb)/(sqrt(beamEnergy*beamEnergy+0.938+0.938)/0.938));
     }
 }
 
@@ -88,7 +90,7 @@ int circle(float x,float y,float z,float r,float c,float flag,float time)
 //   if (fabs(y)>10) return 0;    //Cut on Y
    
    double size=200;   //  size of the canvas
-   if (time<0) size=size+time*5;
+   //if (time<0) size=size+time*5;
    double px=x/size+0.5;
    double py=y/size+0.5;
    double pz=z/size+0.5;
@@ -134,7 +136,8 @@ int circle(float x,float y,float z,float r,float c,float flag,float time)
 int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
 {
    if (time<0) rnd2.SetSeed(time*100);
-   bool doRotate = 1; // rotate the view in the begining
+   
+   bool doRotate = 0; // rotate the view in the begining
    cout <<time<<endl;
    TCanvas *c = new TCanvas("c","",0,0,1600,1600);
    circle(0,0,0,500,0,2,0);
@@ -172,6 +175,7 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
    genTree->SetBranchAddress("genPhi", &genPhi, &b_genPhi);
    genTree->SetBranchAddress("genEta", &genEta, &b_genEta);
    genTree->SetBranchAddress("genID", &genID, &b_genID);
+   
 
 
    cout <<"I am alive"<<endl;
@@ -188,6 +192,9 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
    if (genPt == nullptr) {
       cout <<"invalid event"<<endl;
    } else {
+      beamEnergy = 2510;
+      if (time<-20) beamEnergy = 4*sqrt(50+time); else beamEnergy=2510;
+      cout <<beamEnergy<<endl;
       for (int j=0;j<208;j++){
 	 particle p;
 	 p.l.SetPxPyPzE(0.,0,-2510,sqrt(2510*2510+0.938*0.938));
@@ -270,7 +277,9 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
       }
    }      
    
-   TPaveLabel *timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form(" T= %.2f fm/c ",time));
+   TPaveLabel *timeLabel;
+   if (T<-20) timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form("Acceleration")); 
+   else timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form(" T= %.2f fm/c ",time)); 
    timeLabel->SetFillColor(1);
    timeLabel->SetFillStyle(0); 
    timeLabel->SetTextColor(5); 

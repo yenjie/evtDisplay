@@ -281,6 +281,7 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
    if (T<-20) timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form("Acceleration")); 
    else timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form(" T= %.2f fm/c ",time)); 
    timeLabel->SetFillColor(1);
+   timeLabel->SetBorderSize(0);
    timeLabel->SetFillStyle(0); 
    timeLabel->SetTextColor(5); 
    timeLabel->SetTextSize(0.3);
@@ -288,6 +289,7 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
 
    TPaveLabel *groupLabel = new TPaveLabel(0.4,0.9,0.4,1," MIT Heavy Ion Event Display: Pb+Pb 5.02 TeV ");
    groupLabel->SetFillColor(1); 
+   groupLabel->SetBorderSize(0);
    groupLabel->SetFillStyle(0); 
    groupLabel->SetTextColor(0); 
    groupLabel->SetTextSize(0.3);
@@ -295,6 +297,7 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
 
    TPaveLabel *codeLabel = new TPaveLabel(0.3,0.0,0.3,0.1," Yen-Jie Lee, Andre S. Yoon and Wit Busza ");
    codeLabel->SetFillColor(1); 
+   codeLabel->SetBorderSize(0);
    codeLabel->SetFillStyle(0); 
    codeLabel->SetTextColor(0); 
    codeLabel->SetTextSize(0.3);

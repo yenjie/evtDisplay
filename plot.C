@@ -278,7 +278,7 @@ int plot(int evtNum=1,double time=0,int id=0, bool qgpOnly = false)
    }      
    
    TPaveLabel *timeLabel;
-   if (T<-20) timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form("Acceleration")); 
+   if (time<-20) timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form("Acceleration")); 
    else timeLabel = new TPaveLabel(0.8,0,0.8,0.1,Form(" T= %.2f fm/c ",time)); 
    timeLabel->SetFillColor(1);
    timeLabel->SetBorderSize(0);

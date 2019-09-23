@@ -93,7 +93,8 @@ int mass(int evt=1,bool drawIt=0)
    
    vector<particle> particles;
 
-   genTree->GetEntry(evt);
+   for (int iev=evt*1000;iev<evt*1000+1000;iev++) {
+      genTree->GetEntry(iev);
       for (unsigned int j=0;j<genPt->size();j++)
       {
          if ((*genID)[j]==22) continue;
@@ -129,6 +130,7 @@ int mass(int evt=1,bool drawIt=0)
 	 }
       }
 
+   }
 
    if (drawIt) {
     TCanvas *c = new TCanvas("c","",600,600);

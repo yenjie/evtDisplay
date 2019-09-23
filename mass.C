@@ -87,7 +87,8 @@ int mass(int evt=1,bool drawIt=0)
 
    TLorentzVector l; 
    
-   TH1D *h = new TH1D("h","",60,1.7,2);
+   TH1D *hD = new TH1D("hD","",60,1.7,2);
+   TH1D *hB = new TH1D("hB","",50,5,6);
    //TCanvas *c = new TCanvas("c","",600,600);
    
    vector<particle> particles;
@@ -110,13 +111,33 @@ int mass(int evt=1,bool drawIt=0)
 	 for (unsigned int k=j+1;k<particles.size();k++)
 	 {
 	    l=particles[j].l+particles[k].l;
-	    h->Fill(l.Mag());
+	    hD->Fill(l.Mag());
 	 }
       }
 
-   if (drawIt) h->Draw();
+      for (unsigned int j=0;j<particles.size();j++)
+      {
+         if (fabs(particles[j].pdg)!=13) continue;
+	 for (unsigned int k=j+1;k<particles.size();k++)
+	 {
+            if (fabs(particles[k].pdg)!=13) continue;
+	    for (unsigned int q=k+1;q<particles.size();q++)
+	    {
+	     l=particles[j].l+particles[k].l+particles[q].l;
+	     hB->Fill(l.Mag());
+	    }
+	 }
+      }
 
-   h->Write();
+
+   if (drawIt) {
+    TCanvas *c = new TCanvas("c","",600,600);
+    hD->Draw();
+    TCanvas *c2 = new TCanvas("c2","",600,600);
+    hB->Draw();
+   }
+   hD->Write();
+   hB->Write();
    
    return 1;
 }
